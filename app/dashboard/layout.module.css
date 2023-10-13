@@ -1,0 +1,16 @@
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    min-height: 100vh;
+    background: var(--primary-light);
+    height: 100%;
+}
+
+
+.section {
+    padding: var(--content-space);
+    border-top: 2px solid var(--light-gray);
+    border-left: 2px solid var(--light-gray);
+    border-right: 2px solid var(--light-gray);
+    height: 100%;
+}
