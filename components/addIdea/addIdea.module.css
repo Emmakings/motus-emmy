@@ -1,0 +1,45 @@
+.addIdea {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.h1 {
+    color: var(--primary-100);
+}
+
+.form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width:600px;
+}
+.label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+.textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    /* resize: horizontal; */
+}
+
+.button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.button:hover {
+    background-color: #45a049;
+}

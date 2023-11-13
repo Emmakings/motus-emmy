@@ -40,7 +40,10 @@ export async function POST(request) {
   const ideasCollection = await connectToDb();
 
   try {
-    const insertedIdea = await ideasCollection.insertOne({ ...body });
+    const insertedIdea = await ideasCollection.insertOne({
+      ...body,
+      postedAt: new Date(),
+    });
     return Response.json({ insertedIdea }, { status: 201 });
   } catch (error) {
     console.log(error);

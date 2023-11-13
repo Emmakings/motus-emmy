@@ -1,15 +1,15 @@
 import clientPromise from "@/library/mongo"
 
-const ConnectToDatabase = async () => {
+const ConnectToDb = async () => {
     const client = await clientPromise()
     const db = client.db('motus')
-    const userColletion = db.userColletion('user')
-    return userColletion
+    const userCollection = db.userCollection('user')
+    return userCollection
 }
 
 export async function GET(request) {
-    const userCollection = await ConnectToDatabase();
-    const users = await userColletion.find();
+    const userCollection = await ConnectToDb();
+    const users = await userCollection.find();
     return Response.json({ users })
 }
 
