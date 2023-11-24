@@ -3,8 +3,13 @@ import React from "react";
 import styles from "./allIdeas.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import CurrentIdeas from "../dashboard/current/current";
+import useSWR from 'swr'
+
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function AllIdeas() {
+  const { data, error, isValidating, isLoading } = useSWR('/api/ideas', fetcher, { refreshInterval: 1000 })
   const router = useRouter();
 
   return (
@@ -24,6 +29,7 @@ export default function AllIdeas() {
           <p>Add New Idea</p>
         </button>
       </section>
+      {data?.ideas.map((idea) => <CurrentIdeas idea={idea} key={idea._id}/>)}
     </div>
   );
 }
