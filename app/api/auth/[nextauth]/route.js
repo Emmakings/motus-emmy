@@ -2,32 +2,57 @@ import NextAuth from "next-auth";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/library/mongo";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { verifyPassword } from "@/library/encryption";
 
-// For more information on each option (and a full list of options) go to
-// https://authjs.dev/reference/providers/oauth
-export default NextAuth({
+const connectToDb = async ( email ) => {
+  const client = await clientPromise;
+  const MONGO_DB = process.env.MONGO_DB;
+  const db = client.db(MONGO_DB);
+  const userCollection = db.collection("user");
+  const user = await userCollection.findOne({email:email})
+  return user
+};
+
+const handler = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
 
   providers: [
     CredentialsProvider({
       name: "Sign In to Motus",
-      credentials: {
-        username: { label: "email", type: "text", placeholder: "Enter your email" },
-        password: { label: "Password", type: "password" },
-      },
-      
+
       async authorize(credentials, req) {
-        const res = await fetch("/users", {
-          method: "POST",
-          body: JSON.stringify(credentials),
-          headers: { "Content-Type": "application/json" },
-        });
-        const user = await res.json();
-        if (res.ok && user) {
-          return user;
-        }
-        return null;
+      const user = await connectToDb(credentials.email)
+      
+      const isValid = await verifyPassword(credentials.password, user.password)
+
+      if (!isValid) {
+        console.log("Invalid Credential");
+      }
+
+      if (!user) {
+        console.log("User Not found");
+      }
+
+      return user
       },
     }),
   ],
+
+  secret: process.env.NEXTAUTH_SECRET,
+//  { callbacks: {
+//     async signIn({ user, account, profile, email, credentials }) {
+//       return true
+//     },
+//     async redirect({ url, baseUrl }) {
+//       return baseUrl
+//     },
+//     async session({ session, user, token }) {
+//       return session
+//     },
+//     async jwt({ token, user, account }) {
+//       return token
+//     }
+//   }}
 });
+
+export { handler as GET, handler as POST }

@@ -36,7 +36,7 @@ export default function AddIdea() {
       contentType: "Application/json",
       body: JSON.stringify(data),
     });
-
+    ...
     if (response.ok) {
       setIdea("");
       toast.success("Nice Idea !", {

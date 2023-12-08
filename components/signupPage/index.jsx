@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import styles from "./signup.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react"
 
 export default function SignupPage() {
   const router = useRouter();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ export default function SignupPage() {
   // console.log("Email: " + email);
   // console.log("Password: " + password);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const user = {
       name,
@@ -23,9 +23,29 @@ export default function SignupPage() {
       password,  
     };
 
-    console.log(user);
+  const Response = await fetch("/api/users", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(user)
+    })
+
+    signIn("credentials", {
+      redirect: false,
+      name,
+      email,
+      password
+    })
     handleClearFields()
+
+    if (Response.ok) {
+      alert("user created")
+    } else {
+      alert("error")
+    }
   };
+
 
   const handleClearFields = () => {
     setName ('')
@@ -70,7 +90,7 @@ export default function SignupPage() {
 
         <form onSubmit={handleFormSubmit}>
           <div className={styles.details}>
-            <label for="name">Name</label>
+            <label for="name" className={styles.label}>Name</label>
             <input
               value={name}
               onChange={(e) => handleNameIpnut(e)}
@@ -81,7 +101,7 @@ export default function SignupPage() {
           </div>
 
           <div className={styles.details}>
-            <label for="email">Email</label>
+            <label for="email" className={styles.label}>Email</label>
             <input
               value={email}
               onChange={(e) => handleEmailIpnut(e)}
@@ -92,7 +112,7 @@ export default function SignupPage() {
           </div>
 
           <div className={styles.details}>
-            <label for="password">Password</label>
+            <label for="password" className={styles.label}>Password</label>
             <input
               value={password}
               onChange={(e) => handlePasswordIpnut(e)}

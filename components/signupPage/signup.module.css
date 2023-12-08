@@ -1,5 +1,6 @@
 .login {
-    background: var(--light-gray);
+    /* background: var(--light-gray); */
+    background-image: url("/images/background.jpg");
     min-height: calc(110dvh - 80px);
     color: var(--text-light);
 }
@@ -60,9 +61,13 @@
     margin-bottom: 1vmin;
 }
 
+.details .label{
+    color: white;
+}
+
 .details label {
     font-size: 1rem;
-    color: var(--text-light);
+    /* color: var(--text-light); */
 }
 
 .details input {
@@ -70,6 +75,7 @@
     font-size: 1rem;
     border: none;
     border-radius: .3rem;
+    background: rgba(255, 255, 255, 0.685);
     /* font-weight: bold; */
 }
 

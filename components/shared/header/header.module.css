@@ -1,6 +1,6 @@
 .header {
-    background: var(--white);
     height: 80px;
+    background: linear-gradient(to left, #833AB4,  #C13584, #FD1D1D,#E1306C, #FD1D1D,  #405DE6, #5851D8);
     padding: 2vw;
     display: flex;
     /* flex-direction: row; */

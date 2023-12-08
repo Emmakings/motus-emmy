@@ -1,5 +1,6 @@
 .footer {
-    background: var(--primary-dark);
+    /* background: var(--primary-dark); */
+    background: linear-gradient(20deg, #833AB4,  #C13584, #ec2e2ee7,#E1306C, #ec2e2ee7,  #405DE6, #5851D8);
     color: var(--primary-light);
     font-size: .8rem;
     padding: 2vw 2vw 0;
@@ -44,9 +45,14 @@
     gap: 1.5rem;
 }
 
+.twitter {
+    color: white;
+}
+
 .socials {
     display: flex;
     gap: 1vw;
+    align-items: center;
 }
 
 .socials svg {
@@ -66,7 +72,9 @@
 .developer {
     text-align: center;
     font-size: .8rem;
+    font-weight: bold;
     color: var(--gray);
+    padding-bottom: 1rem;
 }
 
 @media (width < 910px){

@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./login.module.css";
 import Image from "next/image";
 // import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react"
 import Link from "next/link"
 
 export default function LoginPage() {
@@ -21,7 +22,7 @@ export default function LoginPage() {
         </div>
 
         <div className={styles.googleAuth}>
-          <button>Log in with Google</button>
+          <button>Sign in with Google</button>
           <div class={styles.divider}>
             <span></span>
             <span>OR</span>
@@ -29,14 +30,14 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <form>
+        <form className={styles.form}>
           <div className={styles.details}>
-            <label for="email">Email</label>
+            <label for="email" className={styles.label}>Email</label>
             <input required="" placeholder="your@gmail.com" type="email" />
           </div>
 
           <div className={styles.details}>
-            <label for="password">Password</label>
+            <label for="password" className={styles.label}>Password</label>
             <input
               required=""
               placeholder="min. 8 characters"
@@ -45,11 +46,13 @@ export default function LoginPage() {
           </div>
 
           
-          <Link href={'/dashboard'}>
+          {/* <Link href={'/dashboard'}>
             <button class={styles.button}>
               <h4>Log in</h4>
             </button>
-          </Link> 
+          </Link>  */}
+
+          <button className={styles.button} onClick={() => signIn()}>Log in</button>
           
           {/* <button class={styles.button} onClick={() => router.push("/dashboard")}>
             Log in

@@ -51,4 +51,26 @@
 .icons {
     display: flex;
     align-items: center;
+    gap: 0.3rem;
+}
+
+.vote {
+    padding: 0.2px;
+    /* background: white; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment {
+    padding: 0.2px;
+    /* background: white; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voteMe {
+    color: red;
+    height: 100%;
 }
